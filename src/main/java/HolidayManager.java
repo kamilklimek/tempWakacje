@@ -1,18 +1,15 @@
 public class HolidayManager {
     private final ShortestPathManager shortestPathManager;
-
+    private final GraphLoader graphLoader;
 
     // Dependency Injection is cool => https://1024kb.pl/programowanie/java/dependency-injection/
-    public HolidayManager(ShortestPathManager shortestPathManager) {
+    public HolidayManager(ShortestPathManager shortestPathManager, GraphLoader graphLoader) {
         this.shortestPathManager = shortestPathManager;
+        this.graphLoader = graphLoader;
     }
 
     public int getShortestPath(String fileName, int source, int destination) {
-        // Load graph from file to Graph object
-        // You can also create another class for convert loaded matrix to graph object
-        // It's up to you
-
-        Graph graph = null;
+        Graph graph = graphLoader.loadGraphByFileName(fileName);
         return shortestPathManager.getShortestPath(graph, source, destination);
     }
 }
